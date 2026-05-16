@@ -1,0 +1,85 @@
+env/
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+
+#Databses 
+*.db
+*.sqlite3
+instance/
+
+# Other Miscellaneous stuff
+
+templates/
+*.log
+*.png
+*.jpg
+*.jpeg
+
+
+# ==========================================
+# Dependency Directories
+# ==========================================
+node_modules/
+jspm_packages/
+web_hi_res_template_in_node_modules/
+
+# ==========================================
+# Build and Output Directories
+# ==========================================
+dist/
+build/
+out/
+.next/
+.vuepress/dist
+.serverless/
+
+# ==========================================
+# Environment Variables & Secrets (CRITICAL)
+# ==========================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env.json
+
+# ==========================================
+# Logs and Runtime Diagnostics
+# ==========================================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+
+# ==========================================
+# System / OS Specific Files
+# ==========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ==========================================
+# IDEs and Editors
+# ==========================================
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
