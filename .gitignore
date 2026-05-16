@@ -18,12 +18,11 @@ instance/
 
 # Other Miscellaneous stuff
 
-templates/
-*.log
-*.png
-*.jpg
-*.jpeg
-
+templates/**/*.jpg
+templates/**/*.jpeg
+templates/**/*.png
+templates/**/*.gif
+templates/**/*.webp
 
 # ==========================================
 # Dependency Directories
