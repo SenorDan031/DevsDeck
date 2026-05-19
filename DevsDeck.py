@@ -7,13 +7,13 @@ from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-myboard = Flask(__name__)
+application = Flask(__name__)
 
-myboard.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///myboard.db'
-myboard.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-myboard.secret_key = "supersecretkey"
+application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///application.db'
+application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+application.secret_key = "supersecretkey"
 
-db= SQLAlchemy(myboard)
+db= SQLAlchemy(application)
 
 class User(db.Model) :
     __tablename__ = 'users'
@@ -53,9 +53,9 @@ class DevWindow(db.Model):
         nullable=False
     )
 
-@myboard.route('/') 
+@application.route('/') 
 def HOME() :
     return render_template('WELCOME.html')
 
 if __name__ == '__main__':
-    myboard.run(debug=True)
+    application.run(debug=True)

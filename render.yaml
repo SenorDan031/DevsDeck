@@ -3,4 +3,4 @@ services:
     name: devsdeck
     runtime: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn Myboard:myboard"
+    startCommand: "gunicorn DevsDeck:application"
