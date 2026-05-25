@@ -1,0 +1,79 @@
+<!-- Sign up page -->
+
+{% extends 'BaseAccount.html' %}
+
+{% block title %} Sign-Up {% endblock  %}
+
+{% block BODY %}
+
+<div class="auth-container">
+    <div class="auth-card ">
+
+        <h1>Build your OS</h1>
+
+
+
+        <form method="POST">
+            <div class="input-group">
+
+                <label >User Name </label>
+                <input type="text" name="username" placehoder="Your Username here" required> 
+                {% if errors.get('username') %}
+
+                <p class="errors">
+                    {{ errors['username'] }}
+                </p>
+                {% endif %}
+            </div>
+
+            <div class="input-group">
+
+                <label >Email </label>
+                <input type="email" name="email" placehoder="dev01@gmail.com" required> 
+
+                {% if errors.get('email') %}
+
+                <p class="errors">
+                    {{ errors['email'] }}
+                </p>
+                {% endif %}
+            </div>
+
+            <div class="input-group">
+
+                <label >Password </label>
+                <input type="password" name="password" placehoder="password@1234" required> 
+                {% if errors.get('password') %}
+
+                <p class="errors">
+                    {{ errors['password'] }}
+                </p>
+                {% endif %}
+            </div>
+
+            <div class="input-group">
+
+                <label >Contact No </label>
+                <input type="tel" name="contact_no" placehoder="example +91 1234567890" > 
+
+                {% if errors.get('contact_no') %}
+
+                <p class="errors">
+                    {{ errors['contact_no'] }}
+                </p>
+                {% endif %}
+
+            </div>
+
+            <button type="submit">
+                Initiate OS Build
+            </button>
+        </form>
+
+        
+    </div>
+</div>
+
+   
+
+{% endblock %}  

@@ -1,4 +1,5 @@
-#imports
+#IMPORTS
+
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, request, redirect, url_for,session,flash
 from sqlalchemy import Integer, String
@@ -7,6 +8,9 @@ from datetime import datetime
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash, check_password_hash
 
+#================================================================================================
+
+#CONFIGS HERE
 
 application = Flask(__name__)
 
@@ -16,12 +20,15 @@ application.secret_key = "supersecretkey"
 
 db= SQLAlchemy(application)
 
+#================================================================================================
+
+#MODELS here
 class User(db.Model) :
     __tablename__ = 'users'
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     username: Mapped[str] = mapped_column(String(80), unique=True, nullable=False)
-    contact_no: Mapped[str] = mapped_column(String(16), unique=True, nullable=True)
+    contact_no: Mapped[str] = mapped_column(String(16), unique=False, nullable=True)
     email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
     password: Mapped[str] = mapped_column(String(128), nullable=False)
     created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow)
@@ -87,6 +94,10 @@ class DevWindow(db.Model):
         Integer,
         nullable=False
     )
+    
+#================================================================================================
+    
+#ROUTES here
 
 @application.route('/') 
 def HOME() :
@@ -99,17 +110,22 @@ def SIGNUP() :
     values = {}
     
     if request.method == 'POST':
-        Uid  = request.form.get('id', '').strip()
         Uname  = request.form.get('username', '').strip()
         Ucon = request.form.get('contact_no', '').strip()
         Uemail = request.form.get('email', '').strip()
         Upass  = request.form.get('password', '').strip()
         
-        values = {'User_name': Uname, 'User_email': Uemail}
+        values = {
+            'User_name': Uname, 
+            
+            'User_email': Uemail, 
+            
+            'User_contact': Ucon
+        }
 
         # validations
         if len(Uname) < 3:
-            errors['name'] = "Username must be at least 3 characters"
+            errors['username'] = "Username must be at least 3 characters"
 
         if '@' not in Uemail or '.' not in Uemail:
             errors['email'] = "Enter a valid email address"
@@ -117,8 +133,8 @@ def SIGNUP() :
         if len(Upass) < 6:
             errors['password'] = "Password must be at least 6 characters"
             
-        if len(Ucon) < 6:
-            errors['contact_no'] = "contact number must be at least of 10 digits (Excluding country code)"
+        if Ucon and len(Ucon) < 10:
+            errors['contact_no'] = "Contact number must be at least 10 digits"
 
         if errors:
             return render_template('signup.html', errors=errors, values=values)
@@ -132,19 +148,50 @@ def SIGNUP() :
             db.session.commit()
 
             flash(f"Congrats {user_details.username} 🎉, your account has been created successfully", "success")
-            return redirect('/select-role')
+            return render_template('tempPage.html', errors={}, values={})
         
-        except IntegrityError:
+        except IntegrityError as e:
+
             db.session.rollback()
-            errors['email'] = "Email or username already exists"
-            return render_template('signup.html', errors=errors, values=values)
+
+            error_message = str(e)
+
+            if 'users.email' in error_message:
+
+                errors['email'] = "Email already exists"
+
+            elif 'users.username' in error_message:
+
+                errors['username'] = "Username already exists"
+
+            elif 'users.contact_no' in error_message:
+
+                errors['contact_no'] = "Contact number already exists"
+
+            else:
+
+                errors['general'] = "Something went wrong"
+
+            return render_template(
+                'signup.html',
+                errors=errors,
+                values=values
+            )
             
+            
+                
     return render_template('signup.html', errors=errors, values=values)
             
             
+
             
             
             
             
+#MAIN here
+        
 if __name__ == '__main__':
     application.run(debug=True)
+    
+#================================================================================================
+

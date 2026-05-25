@@ -1,0 +1,314 @@
+/* ========================= */
+/* RESET */
+/* ========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* ========================= */
+/* BODY */
+/* ========================= */
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    background:#230364dc;
+
+    font-family:'Press Start 2P', cursive;
+
+    overflow:hidden;
+
+    position:relative;
+}
+
+/* PIXEL GRID */
+
+body::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background-image:
+
+        linear-gradient(
+            rgba(255,255,255,0.06) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.06) 1px,
+            transparent 1px
+        );
+
+    background-size:32px 32px;
+
+    opacity:0.35;
+
+    pointer-events:none;
+
+    z-index:0;
+}
+
+/* ========================= */
+/* AUTH CONTAINER */
+/* ========================= */
+
+.auth-container{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    position: relative;
+
+    z-index:2;
+}
+
+/* ========================= */
+/* AUTH CARD */
+/* ========================= */
+
+.auth-card{
+
+    width:520px;
+
+    background:rgba(0,0,0,0.45);
+
+    backdrop-filter:blur(8px);
+
+    border-radius:4px;
+
+    padding:55px;
+
+    box-shadow:
+        0 0 30px rgba(0,0,0,0.55);
+
+    transition:0.3s;
+}
+
+/* HOVER */
+
+.auth-card:hover{
+
+    transform:
+        translateY(-6px)
+        scale(1.01);
+}
+
+/* ========================= */
+/* TITLE */
+/* ========================= */
+
+.auth-card h1{
+
+    color:#39ff14;
+
+    font-size:24px;
+
+    line-height:1.8;
+
+    margin-bottom:45px;
+
+    text-shadow:
+        3px 3px #4da6ff,
+        0 0 10px white;
+}
+
+/* ========================= */
+/* FORM */
+/* ========================= */
+
+form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:28px;
+}
+
+/* INPUT GROUP */
+
+.input-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+}
+
+/* LABELS */
+
+label{
+
+    color:white;
+
+    font-size:11px;
+
+    line-height:1.7;
+}
+
+/* INPUTS */
+
+input{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:10px;
+
+    background:rgba(255,255,255,0.08);
+
+    color:white;
+
+    font-family:'Press Start 2P', cursive;
+
+    font-size:10px;
+
+    transition:0.25s;
+}
+
+/* INPUT FOCUS */
+
+input:focus{
+
+    border:
+        2px solid #39ff14;
+
+    box-shadow:
+        0 0 14px rgba(57,255,20,0.45);
+}
+
+/* ========================= */
+/* BUTTON */
+/* ========================= */
+
+button{
+
+    margin-top:18px;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#39ff14;
+
+    color:black;
+
+    font-family:'Press Start 2P', cursive;
+
+    font-size:11px;
+
+    cursor:pointer;
+
+    transition:0.25s;
+}
+
+/* BUTTON HOVER */
+
+button:hover{
+
+    transform:
+        translateY(-4px)
+        scale(1.02);
+
+    box-shadow:
+        0 0 20px rgba(57,255,20,0.55);
+}
+
+.error{
+
+    color:#ff4d6d;
+
+    font-size:9px;
+
+    margin-top:10px;
+
+    line-height:1.7;
+
+    font-family:'Press Start 2P', cursive;
+
+    text-shadow:
+        0 0 8px rgba(255,77,109,0.45);
+}
+
+.flash-message{
+
+    position: fixed;
+
+    top: 25px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: #39ff14;
+
+    color: #12002f;
+
+    padding: 14px 28px;
+
+    border-radius: 10px;
+
+    font-family: 'Press Start 2P', cursive;
+
+    font-size: 10px;
+
+    box-shadow:
+        0 0 10px #39ff14,
+        0 0 25px #39ff14;
+
+    z-index: 9999;
+
+    animation: flashFade 4s forwards;
+}
+
+@keyframes flashFade {
+
+    0%{
+        opacity:0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+
+    10%{
+        opacity:1;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    80%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+        visibility:hidden;
+        transform: translateX(-50%) translateY(-20px);
+    }
+}
