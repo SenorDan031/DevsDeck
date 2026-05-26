@@ -1,0 +1,192 @@
+<!-- Log in page -->
+
+{% extends 'BaseAccount.html' %}
+
+{% block title %}    Boot OS  {% endblock %}
+
+{% block styles %}
+
+    <link rel="stylesheet"
+    href="{{ url_for('static',
+    filename='BOOT_STYLE.css') }}">
+
+{% endblock %}
+
+
+{% block BODY %}
+
+
+
+    <div class="static-overlay"></div>
+
+
+
+    <div class="scanlines"></div>
+
+    <!-- MAIN BOOT BOX -->
+
+    <div class="boot-container">
+
+        <h1 class="boot-title">
+            BOOT OS
+        </h1>
+
+        <p class="boot-subtitle">
+            Initializing DevsDeck Environment...
+        </p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                {% for category, message in messages %}
+
+                    <div class="auth-error">
+
+                        {{ message }}
+
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+        <form class="boot-form" method="POST">
+
+            
+
+            <div class="input-group">
+
+                <label>
+                    > USERNAME_
+                </label>
+
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="ENTER USERNAME"
+                    required
+                >
+
+            </div>
+
+            
+
+            <div class="input-group">
+
+                <label>
+                    > PASSWORD_
+                </label>
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="ENTER PASSWORD"
+                    required
+                >
+
+            </div>
+
+        
+
+            <div class="button-group">
+
+                <button type="submit" class="power-btn">
+
+                    POWER ON
+
+                </button>
+
+                <a href="/" class="back-btn">
+
+                    BACK HOME
+
+                </a>
+
+            </div>
+
+        </form>
+
+        
+
+        <div class="terminal-output" id="terminal-output"> </div>
+
+    </div>
+
+<script>
+
+        const form =
+        document.querySelector(".boot-form");
+
+        const terminal =
+        document.getElementById("terminal-output");
+
+        form.addEventListener("submit", async function(e){
+
+            e.preventDefault();
+
+            terminal.innerHTML = `
+
+            <p class="terminal-line">
+
+            > Initializing authentication...
+
+            </p>
+
+            `;
+
+            await new Promise(resolve =>
+                setTimeout(resolve, 900)
+            );
+
+            terminal.innerHTML += `
+
+            <p class="terminal-line">
+
+            > Mounting user workspace...
+
+            </p>
+
+            `;
+
+            await new Promise(resolve =>
+                setTimeout(resolve, 900)
+            );
+
+            terminal.innerHTML += `
+
+            <p class="terminal-line">
+
+            > Starting DevsDeck kernel...
+
+            </p>
+
+            `;
+
+            await new Promise(resolve =>
+                setTimeout(resolve, 1200)
+            );
+
+            form.submit();
+            
+        });
+
+</script>
+
+    <script>
+
+        const authError =
+        document.querySelector(".auth-error");
+
+        if(authError){
+
+            document.body.classList.add(
+                "error-screen"
+            );
+        }
+
+    </script>
+
+{% endblock %}

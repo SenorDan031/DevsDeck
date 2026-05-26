@@ -4,6 +4,15 @@
 
 {% block title %} Sign-Up {% endblock  %}
 
+{% block styles %}
+
+    <link rel="stylesheet"
+    href="{{ url_for('static',
+    filename='SIGN_STYLE.css') }}">
+
+{% endblock %}
+
+
 {% block BODY %}
 
 <div class="auth-container">

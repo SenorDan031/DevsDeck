@@ -181,6 +181,62 @@ def SIGNUP() :
             
                 
     return render_template('signup.html', errors=errors, values=values)
+
+
+
+@application.route('/login', methods=['GET', 'POST'])
+
+def LOGIN():
+
+    errors = {}
+
+    if request.method == 'POST':
+
+        username = request.form.get('username')
+
+        password = request.form.get('password')
+
+        
+        user = User.query.filter_by(
+            username=username
+        ).first()
+
+        
+
+        if user:
+
+          
+
+            if check_password_hash(
+                user.password,
+                password
+            ):
+
+                
+                session['user_id'] = user.id
+
+                session['username'] = user.username
+
+                return render_template('Page.html')
+
+            else:
+
+                flash(
+                    "Auth-Error: Admin not recognised",
+                    "error"
+                )
+
+        else:
+
+            flash(
+                "Auth-Error: Admin not recognised",
+                "error"
+            )
+
+    return render_template(
+        'login.html',
+        errors=errors
+    )
             
             
 

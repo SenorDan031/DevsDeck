@@ -35,6 +35,10 @@
                 About Devs Deck
             </a>
 
+            <a href="#" id="help-btn">
+                HELP
+            </a>
+
            <div class="contact-dropdown">
 
             <button class="contact-btn">
@@ -162,31 +166,38 @@
             <!-- RIGHT ACTION PANEL -->
             <!-- ========================= -->
 
-            <div class="action-panel">
+        <div class="action-panel">
 
                 <h2>
                     Let's build your web OS, Amigo!
                 </h2>
 
-                <div class="action-buttons">
+            <div class="all-actions">
 
-                    <div>
-                       <a href="/signup" class="action-box build-box" > Build My OS</a>
-                    </div>
+                <a href="/signup" class="action-box signup-box">
 
-                    <div class="action-box boot-box">
-                        Boot my OS
-                    </div>
+                    Build My OS
 
-                    <div class="action-box explore-box">
-                        Look other's OS
-                    </div>
+                </a>
+
+                <a href="/login" class="action-box boot-box">
+
+                    Boot My OS
+
+                </a>
+
+                <div class="action-box explore-box">
+
+                    Look other's OS
 
                 </div>
 
             </div>
-
         </div>
+
+    
+
+        
 
         <!-- ========================= -->
         <!-- ABOUT PANEL -->
@@ -240,6 +251,132 @@
                     - Display repositories, projects, and coding stats <br>
                     - View other User's DevsDeck profiles <br>
                     - More optimized user experience  <br>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="help-panel" id="help-panel">
+
+        <!-- HEADER -->
+
+        <div class="help-header">
+
+            <div class="help-close" id="close-help">
+                DD
+            </div>
+
+            <h2>
+                HELP CENTER
+            </h2>
+
+        </div>
+
+        <!-- CONTENT -->
+
+        <div class="help-content">
+
+            <div class="help-section">
+
+                <h3>
+                    # WHAT IS DEVSDECK?
+                </h3>
+
+                <p>
+                    DevsDeck allows developers to create their own
+                    personalized Web OS where they can showcase
+                    projects, platforms, repositories, achievements,
+                    and digital identity in a futuristic desktop-style
+                    environment.
+                </p>
+
+            </div>
+
+            <div class="help-section">
+
+                <h3>
+                    # HOW TO BUILD MY OS?
+                </h3>
+
+                <p>
+                    Click on <span class="help-highlight">
+                    Build My OS
+                    </span> from the welcome page.
+
+                    After signing up, you'll be redirected to the
+                    OS creation page where you can customize:
+                </p>
+
+                <ul>
+
+                    <li> Wallpapers </li>
+
+                    <li> Theme Colors </li>
+
+                    <li> Desktop Layout </li>
+
+                    <li> Fonts & Animations </li>
+
+                    <li> Developer Windows & Links </li>
+
+                </ul>
+
+            </div>
+
+            <div class="help-section">
+
+                <h3>
+                    # HOW TO SHARE MY OS?
+                </h3>
+
+                <p>
+                    Once your DevsDeck setup is complete,
+                    your personalized profile can be shared
+                    publicly through your custom DevsDeck link.
+                </p>
+
+            </div>
+
+            <div class="help-section">
+
+                <h3>
+                    # PLATFORM SUPPORT
+                </h3>
+
+                <p>
+                    DevsDeck currently supports integration
+                    with platforms like:
+                </p>
+
+                <ul>
+
+                    <li> GitHub </li>
+
+                    <li> Instagram </li>
+
+                    <li> Discord </li>
+
+                    <li> Portfolio Links </li>
+
+                    <li> Custom Web Apps </li>
+
+                </ul>
+
+            </div>
+
+            <div class="help-section">
+
+                <h3>
+                    # NEED HELP?
+                </h3>
+
+                <p>
+                    Contact the DevsDeck team through the
+                    Contact dropdown available in the top navbar.
                 </p>
 
             </div>
@@ -363,6 +500,34 @@
         closeAbout.addEventListener("click", () => {
 
             aboutPanel.classList.remove("active");
+
+            pageContent.classList.remove("page-blur");
+
+        });
+
+        // =========================
+        // HELP PANEL
+        // =========================
+
+        const helpBtn = document.getElementById("help-btn");
+
+        const helpPanel = document.getElementById("help-panel");
+
+        const closeHelp = document.getElementById("close-help");
+
+        helpBtn.addEventListener("click", (e) => {
+
+            e.preventDefault();
+
+            helpPanel.classList.add("active");
+
+            pageContent.classList.add("page-blur");
+
+        });
+
+        closeHelp.addEventListener("click", () => {
+
+            helpPanel.classList.remove("active");
 
             pageContent.classList.remove("page-blur");
 
