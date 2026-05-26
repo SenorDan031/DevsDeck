@@ -1,5 +1,4 @@
 #IMPORTS
-
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, request, redirect, url_for,session,flash
 from sqlalchemy import Integer, String
