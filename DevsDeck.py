@@ -81,8 +81,7 @@ class DevWindow(db.Model):
     )
 
     user_id: Mapped[int] = mapped_column(
-        db.ForeignKey('users.id'),
-        unique=True
+        db.ForeignKey('users.id')
     )
 
     window_name: Mapped[str] = mapped_column(
@@ -154,10 +153,9 @@ def SIGNUP() :
 
             flash(f"Congrats {user_details.username} 🎉, your account has been created successfully", "success")
             
-            db.session.commit()
             session['user_id']= user_details.id
             session['username']= user_details.username
-            return redirect(url_for('create_os.html'))
+            return redirect(url_for('create_os'))
         
         except IntegrityError as e:
 
