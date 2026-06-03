@@ -1,3 +1,204 @@
 /* 
 here all styles regarding the creation of the OS will be defined
 */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body{
+
+    margin:0;
+
+    padding:0;
+
+    background:#000;
+
+    font-family:'Press Start 2P', cursive;
+
+    color:#39ff14;
+
+    overflow-x:hidden;
+
+}
+
+/* CRT SCREEN */
+
+.crt-screen{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    position:relative;
+
+    background:#000;
+
+    animation: flicker 0.1s infinite;
+
+
+}
+
+/* SCANLINES */
+
+.crt-screen::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:100%;
+
+    height:100%;
+
+    background:
+    repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.04),
+        rgba(255,255,255,0.04) 1px,
+        transparent 1px,
+        transparent 4px
+    );
+
+    pointer-events:none;
+
+}
+
+.crt-screen::after {
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    opacity: 0.2;
+
+}
+
+/* MAIN BOX */
+
+.crt-container{
+
+    width:850px;
+
+    max-width:90%;
+
+    padding:40px;
+
+    border:3px solid #39ff14;
+
+    box-shadow:
+    0 0 20px #39ff14;
+
+    background:
+    rgba(0,0,0,0.85);
+
+}
+
+/* TITLE */
+
+.title{
+
+    text-align:center;
+
+    font-size:22px;
+
+    margin-bottom:20px;
+
+}
+
+.subtitle{
+
+    text-align:center;
+
+    font-size:10px;
+
+    margin-bottom:35px;
+
+}
+
+/* FORM */
+
+.field-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    margin-bottom:25px;
+
+}
+
+.field-group label{
+
+    margin-bottom:12px;
+
+    font-size:10px;
+
+}
+
+.field-group input[type=text],
+.field-group select{
+
+    background:#000;
+
+    color:#39ff14;
+
+    border:2px solid #39ff14;
+
+    padding:12px;
+
+    font-family:'Press Start 2P', cursive;
+
+}
+
+/* FIXED OPTION */
+
+.fixed-option{
+
+    border:2px solid #39ff14;
+
+    padding:12px;
+
+}
+
+/* BUTTON */
+
+.build-btn{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    background:#39ff14;
+
+    color:#000;
+
+    font-family:'Press Start 2P', cursive;
+
+    cursor:pointer;
+
+    margin-top:20px;
+
+}
+
+.build-btn:hover{
+
+    box-shadow:
+    0 0 20px #39ff14;
+
+}
+@keyframes flicker {
+
+    0% { opacity: 0.98; }
+
+    50% { opacity: 1; }
+
+    100% { opacity: 0.97; }
+
+}

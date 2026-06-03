@@ -1,11 +1,12 @@
 #IMPORTS
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, request, redirect, url_for,session,flash
-from sqlalchemy import Integer, String
+from sqlalchemy import Integer, String, Boolean
 from sqlalchemy.orm import Mapped, mapped_column
 from datetime import datetime
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash, check_password_hash
+
 
 #================================================================================================
 
@@ -45,7 +46,8 @@ class DeckTheme(db.Model):
     )
 
     user_id: Mapped[int] = mapped_column(
-        db.ForeignKey('users.id')
+        db.ForeignKey('users.id'),
+        unique=True
     )
 
     background_color: Mapped[str] = mapped_column(
@@ -64,7 +66,10 @@ class DeckTheme(db.Model):
         String(50)
     )
 
-    animations_enabled: Mapped[bool]
+    animations_enabled: Mapped[bool] = mapped_column(
+    Boolean,
+    default=True
+    )
     
 class DevWindow(db.Model):
 
@@ -76,7 +81,8 @@ class DevWindow(db.Model):
     )
 
     user_id: Mapped[int] = mapped_column(
-        db.ForeignKey('users.id')
+        db.ForeignKey('users.id'),
+        unique=True
     )
 
     window_name: Mapped[str] = mapped_column(
@@ -147,7 +153,11 @@ def SIGNUP() :
             db.session.commit()
 
             flash(f"Congrats {user_details.username} 🎉, your account has been created successfully", "success")
-            return render_template('tempPage.html', errors={}, values={})
+            
+            db.session.commit()
+            session['user_id']= user_details.id
+            session['username']= user_details.username
+            return redirect(url_for('create_os.html'))
         
         except IntegrityError as e:
 
@@ -181,7 +191,10 @@ def SIGNUP() :
                 
     return render_template('signup.html', errors=errors, values=values)
 
-
+@application.route('/create_os', methods=['GET','POST'])
+def BUILD_MY_OS() :
+    return render_template('create_os.html')
+    
 
 @application.route('/login', methods=['GET', 'POST'])
 

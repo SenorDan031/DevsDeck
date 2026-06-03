@@ -2,3 +2,145 @@
 This page will allow the user to create and deploy their WebOS 
 -->
 
+{% extends "base_os.html" %}
+
+{% block title %}
+Create OS
+{% endblock %}
+
+{% block BODY %}
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='CREATE_OS_STYLE.css') }}">
+
+<div class="crt-screen">
+
+    <div class="crt-container">
+
+        <h1 class="title">
+            DEVSDECK OS CONFIGURATION
+        </h1>
+
+        <p class="subtitle">
+            Configure your operating system before deployment.
+        </p>
+
+        <form method="POST">
+
+            <!-- OS NAME -->
+
+            <div class="field-group">
+
+                <label>
+                    SYSTEM > ENTER OS NAME
+                </label>
+
+                <input
+                    type="text"
+                    name="os_name"
+                    placeholder="UserOS"
+                    required
+                >
+
+            </div>
+
+            <!-- BACKGROUND TYPE -->
+
+            <div class="field-group">
+
+                <label>
+                    SYSTEM > BACKGROUND SOURCE
+                </label>
+
+                <select name="background_type">
+
+                    <option value="color">
+                        Solid Color
+                    </option>
+
+                    <option value="wallpaper">
+                        Wallpaper URL
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- COLOR -->
+
+            <div class="field-group">
+
+                <label>
+                    SYSTEM > BACKGROUND COLOR
+                </label>
+
+                <input
+                    type="color"
+                    name="background_color"
+                    value="#111111"
+                >
+
+            </div>
+
+            <!-- WALLPAPER -->
+
+            <div class="field-group">
+
+                <label>
+                    SYSTEM > WALLPAPER URL
+                </label>
+
+                <input
+                    type="text"
+                    name="wallpaper_url"
+                    placeholder="https://..."
+                >
+
+            </div>
+
+            <!-- FONT SIZE -->
+
+            <div class="field-group">
+
+                <label>
+                    SYSTEM > FONT SIZE
+                </label>
+
+                <select name="font_size">
+
+                    <option value="12">
+                        12 PX
+                    </option>
+
+                    <option value="14">
+                        14 PX
+                    </option>
+
+                    <option value="16" selected>
+                        16 PX
+                    </option>
+
+                    <option value="18">
+                        18 PX
+                    </option>
+
+                </select>
+
+            </div>
+
+            <button
+                type="submit"
+                class="build-btn"
+            >
+
+                BUILD MY DECK
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
