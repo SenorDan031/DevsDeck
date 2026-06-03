@@ -1,3 +1,5 @@
+/* Here all styles regarding the welcome page will be defined */
+
 *{
     margin:0;
     padding:0;
@@ -411,7 +413,7 @@ body{
 
 .build-box{
 
-    color:yellow;
+    color:rgb(255, 255, 0);
 
     text-shadow:
         0 0 8px rgba(255,255,0,0.45);
