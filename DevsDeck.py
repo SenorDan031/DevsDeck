@@ -6,6 +6,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 from datetime import datetime
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import generate_password_hash, check_password_hash
+import os
 
 
 #================================================================================================
@@ -14,7 +15,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 application = Flask(__name__)
 
-application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///application.db'
+application.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///application.db')
 application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 application.secret_key = "supersecretkey"
 
@@ -106,8 +107,11 @@ class DevWindow(db.Model):
         Integer,
         nullable=False
     )
-    
+
 #================================================================================================
+
+with application.app_context():
+    db.create_all()
     
 #ROUTES here
 
