@@ -31,7 +31,7 @@ class User(db.Model) :
     username: Mapped[str] = mapped_column(String(80), unique=True, nullable=False)
     contact_no: Mapped[str] = mapped_column(String(16), unique=False, nullable=True)
     email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
-    password: Mapped[str] = mapped_column(String(128), nullable=False)
+    password: Mapped[str] = mapped_column(String(316), nullable=False)
     created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow)
     updated_at: Mapped[datetime] = mapped_column(
     default=datetime.utcnow,
