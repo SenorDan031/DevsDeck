@@ -53,6 +53,10 @@ class DeckTheme(db.Model):
     background_color: Mapped[str] = mapped_column(
         String(50)
     )
+    
+    OS_name: Mapped[str] = mapped_column(
+        String(50)
+    )
 
     wallpaper_url: Mapped[str] = mapped_column(
         String(500)
@@ -65,6 +69,10 @@ class DeckTheme(db.Model):
     primary_color: Mapped[str] = mapped_column(
         String(50)
     )
+    
+    background_type: Mapped[str] = mapped_column(
+    String(20)
+  )
 
     animations_enabled: Mapped[bool] = mapped_column(
     Boolean,
@@ -84,12 +92,12 @@ class DevWindow(db.Model):
         db.ForeignKey('users.id')
     )
 
-    window_name: Mapped[str] = mapped_column(
+    folder_name: Mapped[str] = mapped_column(
         String(50),
         nullable=False
     )
 
-    window_link: Mapped[str] = mapped_column(
+    tab_link: Mapped[str] = mapped_column(
         String(500),
         nullable=False
     )
@@ -155,7 +163,7 @@ def SIGNUP() :
             
             session['user_id']= user_details.id
             session['username']= user_details.username
-            return redirect(url_for('create_os'))
+            return redirect(url_for('BUILD_MY_OS'))
         
         except IntegrityError as e:
 
@@ -191,6 +199,36 @@ def SIGNUP() :
 
 @application.route('/create_os', methods=['GET','POST'])
 def BUILD_MY_OS() :
+    
+    if request.method == "POST" :
+        background_color = request.form.get('background_color')
+        OS_name = request.form.get('OS_name')
+        wallpaper_url = request.form.get('wallpaper_url')
+        font_size = request.form.get('font_size')
+        primary_color = request.form.get('primary_color')
+        background_type = request.form.get('background_type')
+        animations_enabled = bool(request.form.get('animations_enabled'))
+             
+        user_id = session.get('user_id')
+        
+        deck_theme = DeckTheme(
+            user_id=session['user_id'],
+            background_color=background_color,
+            OS_name=OS_name,
+            wallpaper_url=wallpaper_url,
+            font_size=int(font_size),
+            primary_color=primary_color,
+            background_type=background_type,
+            animations_enabled=animations_enabled
+        )
+        
+        db.session.add(deck_theme)
+        db.session.commit()
+        
+        flash("Your OS has been created successfully!", "success")
+        
+        return render_template('Page.html')
+        
     return render_template('create_os.html')
     
 

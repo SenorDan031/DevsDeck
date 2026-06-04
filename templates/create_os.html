@@ -37,8 +37,8 @@ href="{{ url_for('static', filename='CREATE_OS_STYLE.css') }}">
 
                 <input
                     type="text"
-                    name="os_name"
-                    placeholder="UserOS"
+                    name="OS_name"
+                    placeholder="YazOS"
                     required
                 >
 
@@ -52,39 +52,110 @@ href="{{ url_for('static', filename='CREATE_OS_STYLE.css') }}">
                     SYSTEM > BACKGROUND SOURCE
                 </label>
 
-                <select name="background_type">
+                <div class="radio-group">
 
-                    <option value="color">
-                        Solid Color
-                    </option>
+                    <label>
 
-                    <option value="wallpaper">
-                        Wallpaper URL
-                    </option>
+                        <input
+                            type="radio"
+                            name="background_type"
+                            value="color"
+                            checked
+                        >
 
-                </select>
+                        SOLID COLOR
+
+                    </label>
+
+                    <label>
+
+                        <input
+                            type="radio"
+                            name="background_type"
+                            value="wallpaper"
+                        >
+
+                        WALLPAPER URL
+
+                    </label>
+
+                </div>
 
             </div>
 
-            <!-- COLOR -->
+            <!-- COLOR SECTION -->
 
-            <div class="field-group">
+            <div
+                id="color-section"
+                class="field-group"
+            >
 
                 <label>
-                    SYSTEM > BACKGROUND COLOR
+                    SYSTEM > SELECT COLOR
                 </label>
 
-                <input
-                    type="color"
-                    name="background_color"
-                    value="#111111"
-                >
+                <div class="color-grid">
+
+                    <label class="color-box green">
+
+                        <input
+                            type="radio"
+                            name="background_color"
+                            value="#39ff14"
+                            checked
+                        >
+
+                        GREEN
+
+                    </label>
+
+                    <label class="color-box blue">
+
+                        <input
+                            type="radio"
+                            name="background_color"
+                            value="#00bfff"
+                        >
+
+                        BLUE
+
+                    </label>
+
+                    <label class="color-box red">
+
+                        <input
+                            type="radio"
+                            name="background_color"
+                            value="#ff3c3c"
+                        >
+
+                        RED
+
+                    </label>
+
+                    <label class="color-box purple">
+
+                        <input
+                            type="radio"
+                            name="background_color"
+                            value="#c770ff"
+                        >
+
+                        PURPLE
+
+                    </label>
+
+                </div>
 
             </div>
 
-            <!-- WALLPAPER -->
+            <!-- WALLPAPER URL -->
 
-            <div class="field-group">
+            <div
+                id="wallpaper-section"
+                class="field-group"
+                style="display:none;"
+            >
 
                 <label>
                     SYSTEM > WALLPAPER URL
@@ -95,6 +166,36 @@ href="{{ url_for('static', filename='CREATE_OS_STYLE.css') }}">
                     name="wallpaper_url"
                     placeholder="https://..."
                 >
+
+            </div>
+
+            <!-- PRIMARY COLOR -->
+
+            <div class="field-group">
+
+                <label>
+                    SYSTEM > PRIMARY COLOR
+                </label>
+
+                <select name="primary_color">
+
+                    <option value="#39ff14">
+                        GREEN
+                    </option>
+
+                    <option value="#00bfff">
+                        BLUE
+                    </option>
+
+                    <option value="#ff3c3c">
+                        RED
+                    </option>
+
+                    <option value="#c770ff">
+                        PURPLE
+                    </option>
+
+                </select>
 
             </div>
 
@@ -128,6 +229,24 @@ href="{{ url_for('static', filename='CREATE_OS_STYLE.css') }}">
 
             </div>
 
+            <!-- ANIMATIONS -->
+
+            <div class="field-group">
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        name="animations_enabled"
+                        checked
+                    >
+
+                    ENABLE ANIMATIONS
+
+                </label>
+
+            </div>
+
             <button
                 type="submit"
                 class="build-btn"
@@ -142,5 +261,55 @@ href="{{ url_for('static', filename='CREATE_OS_STYLE.css') }}">
     </div>
 
 </div>
+
+<script>
+
+const wallpaperRadio =
+document.querySelector(
+    'input[value="wallpaper"]'
+);
+
+const colorRadio =
+document.querySelector(
+    'input[value="color"]'
+);
+
+const wallpaperSection =
+document.getElementById(
+    "wallpaper-section"
+);
+
+const colorSection =
+document.getElementById(
+    "color-section"
+);
+
+wallpaperRadio.addEventListener(
+    "change",
+    () => {
+
+        wallpaperSection.style.display =
+            "block";
+
+        colorSection.style.display =
+            "none";
+
+    }
+);
+
+colorRadio.addEventListener(
+    "change",
+    () => {
+
+        wallpaperSection.style.display =
+            "none";
+
+        colorSection.style.display =
+            "block";
+
+    }
+);
+
+</script>
 
 {% endblock %}
